@@ -141,16 +141,103 @@ h2 {
     text-align: center; /* Centraliza o H2 "Vagas Salvas" */
 }
 
-table button.delete-btn {
-    background-color: #dc3545; /* Vermelho para Excluir */
-    color: white;
-    padding: 6px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Adiciona rolagem horizontal se a tabela for muito larga */
+    margin-top: 20px;
 }
 
-table button.delete-btn:hover {
-    background-color: #c82333;
+table {
+    width: 100%;
+    min-width: 800px; /* Define uma largura mínima para a tabela, forçando a rolagem se necessário */
+    border-collapse: collapse;
+    /* margin-top: 20px; /* Movido para .table-container */
+}
+
+th, td {
+    border: 1px solid #555; 
+    padding: 10px; /* Aumenta um pouco o padding para melhor toque em mobile */
+    text-align: left;
+    white-space: nowrap; /* Impede que o texto quebre, útil com overflow-x */
+}
+
+th {
+    background-color: #404040; 
+    color: #f4f4f4;
+    position: sticky; /* Faz o cabeçalho da tabela ficar fixo no topo durante a rolagem vertical da tabela */
+    top: 0; /* Necessário para position: sticky */
+    z-index: 10; /* Garante que o cabeçalho fique acima do conteúdo da tabela */
+}
+
+input[type="text"],
+input[type="url"],
+textarea {
+    background-color: #2c2c2c; 
+    color: #f4f4f4;
+    border: 1px solid #555;
+    padding: 12px; /* Aumenta padding para mobile */
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    font-size: 16px; /* Aumenta o tamanho da fonte para melhor legibilidade */
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+    body {
+        margin: 10px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    form#addJobForm {
+        padding: 15px;
+    }
+
+    th, td {
+        padding: 8px; /* Ajusta padding para telas menores */
+        white-space: normal; /* Permite quebra de linha em células em telas menores se nowrap for demais */
+    }
+
+    table {
+        min-width: auto; /* Remove a largura mínima em telas pequenas se white-space: normal for usado */
+    }
+
+    /* Se quiser que os inputs do formulário fiquem menores em mobile, pode ajustar aqui */
+    /* Por exemplo, se os labels ficarem ao lado:
+    form#addJobForm div {
+        display: flex;
+        flex-direction: column;
+    }
+    label {
+        margin-bottom: 5px;
+    }
+    */
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5em;
+    }
+
+    th, td {
+        font-size: 0.9em; /* Reduz um pouco a fonte da tabela em telas muito pequenas */
+    }
+
+    form#addJobForm button[type="submit"] {
+        padding: 10px 15px;
+        font-size: 1em;
+    }
+
+    table button.delete-btn {
+        padding: 4px 8px;
+        font-size: 0.9em;
+    }
+
+    img[alt="Logo da Mentoria"] {
+        max-width: 150px; /* Reduz o logo em telas pequenas */
+    }
 }
