@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oportunidades em Testes de Software</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <img src="images/mentoria-logo.png" alt="Logo da Mentoria" style="max-width: 200px; height: auto;">
+    </div>
+    <h1>Estudo de Oportunidades na Área de Testes de Software</h1>
+    <p>O estudo das oportunidades é o primeiro passo na busca por uma vaga na área de testes de software. Envolve conhecer profundamente sobre a vaga, de modo a ser mais assertivo na busca por uma oportunidade naquela empresa.</p>
+
+    <form id="addJobForm">
+        <h2>Adicionar Nova Vaga</h2>
+        <div>
+            <label for="link">Link da Vaga:</label>
+            <input type="url" id="link" name="link" required>
+        </div>
+        <div>
+            <label for="cargo">Cargo:</label>
+            <input type="text" id="cargo" name="cargo" required>
+        </div>
+        <div>
+            <label for="senioridade">Senioridade:</label>
+            <input type="text" id="senioridade" name="senioridade">
+        </div>
+        <div>
+            <label for="empresa">Empresa:</label>
+            <input type="text" id="empresa" name="empresa">
+        </div>
+        <div>
+            <label for="qaEmpresa">QA da Empresa (Nome/Contato):</label>
+            <input type="text" id="qaEmpresa" name="qaEmpresa">
+        </div>
+        <div>
+            <label for="rhEmpresa">RH da Empresa (Nome/Contato):</label>
+            <input type="text" id="rhEmpresa" name="rhEmpresa">
+        </div>
+        <div>
+            <label for="habilidades">Principais habilidades requeridas:</label>
+            <textarea id="habilidades" name="habilidades" rows="3"></textarea>
+        </div>
+        <div>
+            <label for="quemIndica">Quem Indica:</label>
+            <input type="text" id="quemIndica" name="quemIndica">
+        </div>
+        <div>
+            <label for="salario">Salário no Glassdoor (ou estimativa):</label>
+            <input type="text" id="salario" name="salario">
+        </div>
+        <button type="submit">Adicionar Vaga à Tabela</button>
+    </form>
+
+    <h2>Vagas Salvas</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Link</th>
+                <th>Cargo</th>
+                <th>Senioridade</th>
+                <th>Empresa</th>
+                <th>QA da Empresa</th>
+                <th>RH da Empresa</th>
+                <th>Principais habilidades</th>
+                <th>Quem Indica</th>
+                <th>Salário Glassdoor</th>
+                <th>Ações</th> <!-- Coluna para botões de ação como Excluir -->
+            </tr>
+        </thead>
+        <tbody id="jobTableBody">
+            <!-- As linhas da tabela serão inseridas aqui pelo JavaScript -->
+        </tbody>
+    </table>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

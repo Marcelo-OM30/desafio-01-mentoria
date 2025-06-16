@@ -1,0 +1,156 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #555; /* Bordas mais claras para contraste */
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #404040; /* Fundo do cabeçalho da tabela mais escuro */
+    color: #f4f4f4;
+}
+
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: #2c2c2c; /* Fundo escuro */
+    color: #f4f4f4; /* Texto claro */
+}
+
+body::before {
+    content: "";
+    position: fixed; /* Fixa a marca d'água na janela de visualização */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Largura total da janela */
+    height: 100vh; /* Altura total da janela */
+    background-image: url('images/mentoria-logo.png');
+    background-repeat: no-repeat; /* Para não repetir a imagem */
+    background-position: center center; /* Centraliza a imagem */
+    background-size: contain; /* Ajusta a imagem para caber, mantendo a proporção. Pode usar 'cover' ou um tamanho específico ex: '300px' */
+    opacity: 0.05; /* Opacidade ajustada para tema escuro */
+    z-index: -1; /* Coloca a marca d'água atrás de todo o conteúdo */
+}
+
+input[type="text"] {
+    background-color: #3a3a3a; /* Fundo do input escuro */
+    color: #f4f4f4; /* Texto do input claro */
+    border: 1px solid #555;
+    padding: 6px;
+    box-sizing: border-box;
+    width: 95%;
+}
+
+button {
+    background-color: #007bff; /* Cor do botão primário (exemplo) */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #0056b3; /* Cor do botão ao passar o mouse */
+}
+
+h1 {
+    text-align: center;
+    color: #f4f4f4; /* Garante que o H1 também seja claro */
+}
+
+p {
+    text-align: center; /* Alinha o parágrafo ao centro */
+    margin-bottom: 20px; /* Adiciona um espaço abaixo do parágrafo */
+}
+
+/* Estilo para o logo, se necessário ajustes específicos para o tema escuro */
+/* img[alt="Logo da Mentoria"] {
+    /* filter: invert(1) hue-rotate(180deg); /* Exemplo: Inverter cores se o logo for escuro e não tiver fundo transparente */
+/*}
+
+/* Estilos para o formulário */
+form#addJobForm {
+    background-color: #3a3a3a;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+form#addJobForm h2 {
+    text-align: center;
+    margin-top: 0;
+    color: #f4f4f4;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: #f4f4f4;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="url"],
+textarea {
+    background-color: #2c2c2c; /* Um pouco mais escuro que o form */
+    color: #f4f4f4;
+    border: 1px solid #555;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+form#addJobForm div {
+    margin-bottom: 15px;
+}
+
+form#addJobForm button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: block; /* Para centralizar com margin auto */
+    margin: 20px auto 0 auto; /* Espaço superior e centraliza */
+}
+
+form#addJobForm button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para a tabela e seus botões de ação */
+h2 {
+    text-align: center; /* Centraliza o H2 "Vagas Salvas" */
+}
+
+table button.delete-btn {
+    background-color: #dc3545; /* Vermelho para Excluir */
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+table button.delete-btn:hover {
+    background-color: #c82333;
+}
