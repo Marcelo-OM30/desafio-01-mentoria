@@ -16,39 +16,39 @@
     <form id="addJobForm">
         <h2>Adicionar Nova Vaga</h2>
         <div>
-            <label for="link">Link da Vaga:</label>
-            <input type="url" id="link" name="link" required>
+            <label for="link">Link da Vaga:<span class="required-asterisk">*</span></label>
+            <input type="url" id="link" name="link">
         </div>
         <div>
-            <label for="cargo">Cargo:</label>
-            <input type="text" id="cargo" name="cargo" required>
+            <label for="cargo">Cargo:<span class="required-asterisk">*</span></label>
+            <input type="text" id="cargo" name="cargo">
         </div>
         <div>
-            <label for="senioridade">Senioridade:</label>
+            <label for="senioridade">Senioridade:<span class="required-asterisk">*</span></label>
             <input type="text" id="senioridade" name="senioridade">
         </div>
         <div>
-            <label for="empresa">Empresa:</label>
+            <label for="empresa">Empresa:<span class="required-asterisk">*</span></label>
             <input type="text" id="empresa" name="empresa">
         </div>
         <div>
-            <label for="qaEmpresa">QA da Empresa (Nome/Contato):</label>
+            <label for="qaEmpresa">QA da Empresa (Nome/Contato):<span class="required-asterisk">*</span></label>
             <input type="text" id="qaEmpresa" name="qaEmpresa">
         </div>
         <div>
-            <label for="rhEmpresa">RH da Empresa (Nome/Contato):</label>
+            <label for="rhEmpresa">RH da Empresa (Nome/Contato):<span class="required-asterisk">*</span></label>
             <input type="text" id="rhEmpresa" name="rhEmpresa">
         </div>
         <div>
-            <label for="habilidades">Principais habilidades requeridas:</label>
-            <textarea id="habilidades" name="habilidades" rows="3"></textarea>
+            <label for="habilidades">Principais habilidades requeridas:<span class="required-asterisk">*</span></label>
+            <textarea id="habilidades" name="habilidades" rows="3" placeholder="Separe as habilidades por vírgula, nova linha ou ponto final."></textarea>
         </div>
         <div>
-            <label for="quemIndica">Quem Indica:</label>
+            <label for="quemIndica">Quem Indica:<span class="required-asterisk">*</span></label>
             <input type="text" id="quemIndica" name="quemIndica">
         </div>
         <div>
-            <label for="salario">Salário no Glassdoor (ou estimativa):</label>
+            <label for="salario">Salário no Glassdoor (ou estimativa):<span class="required-asterisk">*</span></label>
             <input type="text" id="salario" name="salario">
         </div>
         <button type="submit">Adicionar Vaga à Tabela</button>
@@ -66,9 +66,9 @@
                     <th>Empresa</th>
                     <th>QA da Empresa</th>
                     <th>RH da Empresa</th>
-                    <th>Principais habilidades</th>
+                    <th>Principais habilidades requeridas</th>
                     <th>Quem Indica</th>
-                    <th>Salário Glassdoor</th>
+                    <th>Salário no Glassdoor</th>
                     <th>Ações</th> <!-- Coluna para botões de ação como Excluir -->
                 </tr>
             </thead>

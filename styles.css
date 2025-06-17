@@ -277,3 +277,25 @@ footer p {
     text-shadow: 1px 1px 2px #000000; 
 }
 */
+
+.truncate-link {
+    max-width: 200px; /* Ajuste o valor conforme necessário */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Estilização para a lista de habilidades dentro da tabela */
+.table-container td ul {
+    margin: 0; /* Remove margens padrão da lista */
+    padding-left: 20px; /* Adiciona um recuo para os bullets */
+    list-style-type: disc; /* Garante que os bullets sejam discos */
+}
+
+.table-container td li {
+    margin-bottom: 4px; /* Espaçamento entre os itens da lista */
+}
+
+.required-asterisk {
+    color: red;
+    margin-left: 4px; /* Pequeno espaço entre o texto do label e o asterisco */
+}
