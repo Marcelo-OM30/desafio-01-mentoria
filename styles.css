@@ -241,3 +241,39 @@ textarea {
         max-width: 150px; /* Reduz o logo em telas pequenas */
     }
 }
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+    border-top: 1px solid #555; /* Cor da borda que combina com o tema escuro */
+    color: #aaa; /* Cor do texto um pouco mais suave */
+}
+
+footer p {
+    margin: 5px 0; /* Espaçamento entre os parágrafos do rodapé */
+    font-size: 0.9em;
+}
+
+.logo-grupo33-header {
+    max-width: 150px; /* Ajuste o tamanho conforme necessário */
+    height: auto;
+    margin-top: 10px;
+}
+
+.logo-grupo33-footer {
+    max-width: 100px; /* Menor no rodapé */
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* Removendo o estilo do logo de texto anterior, se não for mais necessário */
+/*
+.text-logo-grupo33 {
+    font-size: 2em; 
+    font-weight: bold;
+    color: #007bff; 
+    margin-top: 10px; 
+    text-shadow: 1px 1px 2px #000000; 
+}
+*/
