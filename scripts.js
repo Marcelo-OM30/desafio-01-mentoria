@@ -1,82 +1,107 @@
 document.addEventListener('DOMContentLoaded', () => {
     const addJobForm = document.getElementById('addJobForm');
     const jobTableBody = document.getElementById('jobTableBody');
-    const exportCsvButton = document.getElementById('exportCsvButton'); // Botão de exportar CSV
-    const storageKey = 'jobOpportunitiesData_v2'; // Nova chave para evitar conflitos com a versão antiga
+    const exportCsvButton = document.getElementById('exportCsvButton');
 
-    // Carrega os dados do Local Storage ao iniciar
-    loadJobsFromStorage();
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyA49jFTJ1rj17DaVHS0cVqRFvhOTuAvDOg",
+        authDomain: "rastreador-vagas-qa.firebaseapp.com",
+        projectId: "rastreador-vagas-qa",
+        storageBucket: "rastreador-vagas-qa.firebasestorage.app", // Corrigido para .app e não .firebasestorage.app
+        messagingSenderId: "356952246651",
+        appId: "1:356952246651:web:775adfdfd6d746d85895de"
+    };
 
-    addJobForm.addEventListener('submit', function(event) {
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const vagasCollection = db.collection('vagas');
+
+    // Carrega os dados do Firestore ao iniciar
+    loadJobsFromFirestore();
+
+    addJobForm.addEventListener('submit', async function(event) {
         event.preventDefault(); // Impede o envio padrão do formulário
 
-        const newJob = {
-            link: this.link.value,
-            cargo: this.cargo.value,
-            senioridade: this.senioridade.value,
-            empresa: this.empresa.value,
-            qaEmpresa: this.qaEmpresa.value,
-            rhEmpresa: this.rhEmpresa.value,
-            habilidades: this.habilidades.value,
-            quemIndica: this.quemIndica.value,
-            salario: this.salario.value,
-            id: Date.now() // ID simples baseado no timestamp para exclusão
+        const newJobData = {
+            link: this.link.value || '-',
+            cargo: this.cargo.value || '-',
+            senioridade: this.senioridade.value || '-',
+            empresa: this.empresa.value || '-',
+            qaEmpresa: this.qaEmpresa.value || '-',
+            rhEmpresa: this.rhEmpresa.value || '-',
+            habilidades: this.habilidades.value || '-',
+            quemIndica: this.quemIndica.value || '-',
+            salario: this.salario.value || '-',
+            // Firestore gerará o ID automaticamente
+            // Adicionamos um timestamp para ordenação, se necessário no futuro
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
         };
 
-        addJobToTable(newJob);
-        saveJobToStorage(newJob);
-        this.reset(); // Limpa o formulário
+        try {
+            const docRef = await vagasCollection.add(newJobData);
+            // Não precisamos chamar addJobToTable aqui se usarmos o listener onSnapshot
+            // Se não usarmos onSnapshot, chamamos: addJobToTable({...newJobData, id: docRef.id});
+            this.reset(); // Limpa o formulário
+        } catch (error) {
+            console.error('Erro ao adicionar vaga:', error);
+            alert('Falha ao adicionar vaga. Verifique o console para mais detalhes.');
+        }
     });
 
     function addJobToTable(job) {
         const row = jobTableBody.insertRow();
-        row.setAttribute('data-id', job.id);
+        row.setAttribute('data-id', job.id); // Usamos o ID do documento Firestore
 
-        row.insertCell().textContent = job.link ? job.link : '-';
-        row.insertCell().textContent = job.cargo ? job.cargo : '-';
-        row.insertCell().textContent = job.senioridade ? job.senioridade : '-';
-        row.insertCell().textContent = job.empresa ? job.empresa : '-';
-        row.insertCell().textContent = job.qaEmpresa ? job.qaEmpresa : '-';
-        row.insertCell().textContent = job.rhEmpresa ? job.rhEmpresa : '-';
-        row.insertCell().textContent = job.habilidades ? job.habilidades : '-';
-        row.insertCell().textContent = job.quemIndica ? job.quemIndica : '-';
-        row.insertCell().textContent = job.salario ? job.salario : '-';
+        row.insertCell().textContent = job.link;
+        row.insertCell().textContent = job.cargo;
+        row.insertCell().textContent = job.senioridade;
+        row.insertCell().textContent = job.empresa;
+        row.insertCell().textContent = job.qaEmpresa;
+        row.insertCell().textContent = job.rhEmpresa;
+        row.insertCell().textContent = job.habilidades;
+        row.insertCell().textContent = job.quemIndica;
+        row.insertCell().textContent = job.salario;
         
         const actionsCell = row.insertCell();
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Excluir';
         deleteButton.classList.add('delete-btn');
-        deleteButton.onclick = function() {
-            deleteJob(job.id, row);
+        deleteButton.onclick = async function() {
+            await deleteJobFromFirestore(job.id, row);
         };
         actionsCell.appendChild(deleteButton);
     }
 
-    function saveJobToStorage(job) {
-        let jobs = getJobsFromStorage();
-        jobs.push(job);
-        localStorage.setItem(storageKey, JSON.stringify(jobs));
+    // Usar onSnapshot para ouvir atualizações em tempo real
+    function loadJobsFromFirestore() {
+        vagasCollection.orderBy("createdAt", "desc").onSnapshot(snapshot => {
+            jobTableBody.innerHTML = ''; // Limpa a tabela antes de adicionar novos dados
+            snapshot.forEach(doc => {
+                const job = doc.data();
+                job.id = doc.id; // Adiciona o ID do documento ao objeto job
+                addJobToTable(job);
+            });
+        }, error => {
+            console.error('Erro ao carregar vagas do Firestore:', error);
+            alert('Falha ao carregar vagas. Verifique o console para mais detalhes.');
+        });
     }
 
-    function loadJobsFromStorage() {
-        let jobs = getJobsFromStorage();
-        jobs.forEach(job => addJobToTable(job));
+    async function deleteJobFromFirestore(jobId, rowElement) {
+        try {
+            await vagasCollection.doc(jobId).delete();
+            // A remoção da linha da tabela será tratada pelo onSnapshot
+            // Se não usarmos onSnapshot: rowElement.remove();
+            // alert('Vaga excluída com sucesso!'); // Opcional
+        } catch (error) {
+            console.error('Erro ao excluir vaga do Firestore:', error);
+            alert(`Falha ao excluir vaga: ${error.message}`);
+        }
     }
 
-    function getJobsFromStorage() {
-        const jobsJson = localStorage.getItem(storageKey);
-        return jobsJson ? JSON.parse(jobsJson) : [];
-    }
-
-    function deleteJob(jobId, rowElement) {
-        let jobs = getJobsFromStorage();
-        jobs = jobs.filter(job => job.id !== jobId);
-        localStorage.setItem(storageKey, JSON.stringify(jobs));
-        rowElement.remove();
-        // alert('Vaga excluída!'); // Opcional: feedback ao usuário
-    }
-
-    // Função para exportar dados da tabela para CSV
+    // Função para exportar dados da tabela para CSV (permanece a mesma, pois lê do DOM)
     function exportTableToCSV(filename) {
         let csv = [];
         const rows = document.querySelectorAll("table tr");
