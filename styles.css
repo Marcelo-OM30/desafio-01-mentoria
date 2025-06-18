@@ -279,9 +279,12 @@ footer p {
 */
 
 .truncate-link {
-    max-width: 200px; /* Ajuste o valor conforme necessário */
+    display: inline-block; /* Importante para max-width e overflow em <a> */
+    max-width: 200px;      /* Ou a largura que você desejar */
+    white-space: nowrap;   /* Impede a quebra de linha dentro do link */
     overflow: hidden;
     text-overflow: ellipsis;
+    vertical-align: middle;/* Para alinhar bem com o texto da célula */
 }
 
 /* Estilização para a lista de habilidades dentro da tabela */

@@ -121,9 +121,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Preenche as células da linha com os dados da vaga
         const linkCell = row.insertCell();
-        linkCell.textContent = job.link;
-        linkCell.classList.add('truncate-link'); // Adiciona classe para truncar
-        linkCell.setAttribute('title', job.link); // Mostra o link completo no hover
+        const linkAnchor = document.createElement('a');
+        linkAnchor.href = job.link;
+        linkAnchor.textContent = job.link;
+        linkAnchor.target = '_blank'; // Abrir em nova aba
+        linkAnchor.title = job.link; // Tooltip com o link completo
+        linkAnchor.classList.add('truncate-link'); // Aplica a classe para truncar
+        linkCell.appendChild(linkAnchor);
 
         row.insertCell().textContent = job.cargo;
         row.insertCell().textContent = job.senioridade;
